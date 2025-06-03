@@ -2,25 +2,25 @@
 
 This module is designed for generating S-curve velocity profiles in stepper motor control systems. It achieves this functionality without relying on any IP cores or DSP resources, with a minimal resource footprint of **700 LUTs**. Notably, it is exclusively compatible with **Xilinx FPGAs**. To integrate this module into your project, simply add the files **s_curve_core.edf** and **s_curve_core.v**, allowing you to instantiate the `s_curve_core` module seamlessly.
 
-1. **Extended Distance Range:** Supports travel distances of up to **1,000,000 pulses (20-bit precision)**, accommodating large-scale motion applications.
+1. **Extended Distance Range:** Supports travel distances of up to **1,000,000 pulses**, accommodating large-scale motion applications.
 2. **High-Speed Operation:** Delivers maximum speeds of **1,000,000 pulses per second (p/s)**, fully compatible with high-resolution 256 microstep configurations for smooth, precise motion control.
 
 ## Interface
 
 ~~~verilog
 module s_curve_core (
-    input        		sys_clk,                   	// System clock (fixed 50MHz)
-    input        		sys_rst_n,                 	// Low-level reset
-    input        		start_s,  					// Single-cycle start      
-    input  [15:0] 		AIM_SPEED, 					// Target speed, unit: p /s
-    input  [31:0] 		AA_ACCELERATION_CLK,     	// Acceleration jerk (fixed-point number), unit:  p/(s³)
-    input  [31:0] 		AA_ACCELERATION2_CLK,   	// Deceleration jerk (fixed-point number)
-    input  [15:0] 		TARGET_POS,              	// Target position, unit: p(pulse)
-    input  [15:0] 		theory_dec_len,         	// Theoretical deceleration length input, unit: p
-    input     			force_stop,            		// Emergency stop signal
-    output reg [15:0] 	output_counter,      		// Pulse counter, unit: p
-    output reg 			pulse,						// Stepper motor pulse
-    output reg       	pulse_sent_done       		// Step completion indicator
+    input               sys_clk,                   	// System clock (fixed 50MHz)
+    input               sys_rst_n,                 	// Low-level reset
+    input               start_s,  					// Single-cycle start      
+    input  [15:0]       AIM_SPEED, 					// Target speed, unit: p /s
+    input  [31:0]       AA_ACCELERATION_CLK,     	// Acceleration jerk (fixed-point number), unit:  p/(s³)
+    input  [31:0]       AA_ACCELERATION2_CLK,   	// Deceleration jerk (fixed-point number)
+    input  [15:0]       TARGET_POS,              	// Target position, unit: p(pulse)
+    input  [15:0]       theory_dec_len,         	// Theoretical deceleration length input, unit: p
+    input               force_stop,            		// Emergency stop signal
+    output reg [15:0]   output_counter,      		// Pulse counter, unit: p
+    output reg          pulse,						// Stepper motor pulse
+    output reg          pulse_sent_done       		// Step completion indicator
 );
 ~~~
 
